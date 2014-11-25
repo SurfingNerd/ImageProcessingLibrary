@@ -7,8 +7,8 @@
     <ProjectGuid>{EEB135C6-1562-4409-8FE3-B958FFEBEB7E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Chronis.ResourcesProvider</RootNamespace>
-    <AssemblyName>Chronis.ResourcesProvider</AssemblyName>
+    <RootNamespace>ImageProcessingLibrary</RootNamespace>
+    <AssemblyName>ImageProcessingLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NoStdLib>True</NoStdLib>

@@ -38,15 +38,23 @@ namespace ImageProcessingLibrary.Metadata
         {
             AppConfigFascade fascade = AppConfigFascade.Instance;
 
+            string assemblyName = GetFileSystemFriendlyName(args.Name);
+
             foreach (var directory in fascade.DllDirectories)
             {
-                string fileName = System.IO.Path.Combine(directory, args.Name + ".dll");
+                string fileName = System.IO.Path.Combine(directory, assemblyName + ".dll");
                 if (System.IO.File.Exists(fileName))
                 {
                     return Assembly.LoadFile(fileName);
                 }
             }
             return null;
+        }
+
+        private string GetFileSystemFriendlyName(string name)
+        {
+            string[] result = name.Split(',');
+            return result[0];
         }
 
         public Metadata BuildFromAssemblies(IEnumerable<System.Reflection.Assembly> assemblies)
@@ -63,6 +71,7 @@ namespace ImageProcessingLibrary.Metadata
                         metadata.ActivityType = type;
                         metadata.CreateActivity = type.GetInterface(typeof(ICreateImageActivity).FullName) != null;
                         metadata.ReadsSingleImage = type.GetInterface(typeof(ISingleImageActivity).FullName) != null;
+                        metadata.AssemblyName = type.Assembly.GetName().Name;
                         result.Activities.Add(metadata);
                     }
                 }

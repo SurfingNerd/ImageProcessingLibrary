@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,47 @@ namespace ImageProcessingLibrary
     public interface IImageTypeConverter
     {
         bool CanConvert(object instance, Type targetType);
-        object Convert(object instance);
+        object Convert(object instance, Type targetType);
+    }
+
+    /// <summary>
+    /// abstract baseclass that simplifies creating converters to convert from T to Bitmap and Bitmap to T.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public abstract class SingleBitmapImageTypeConverter<T> : IImageTypeConverter
+    {
+        public bool CanConvert(object instance, Type targetType)
+        {
+            return IsForwardConversion(instance, targetType) || IsBackwardConversion(instance, targetType);
+        }
+
+        private bool IsForwardConversion(object instance, Type targetType)
+        {
+            return instance is Bitmap && (targetType == typeof(T));
+        }
+
+        private bool IsBackwardConversion(object instance, Type targetType)
+        {
+            return instance is T && (targetType == typeof(Bitmap));
+        }
+
+        public object Convert(object instance, Type targetType)
+        {
+            if (IsForwardConversion(instance, targetType))
+            {
+                return ConvertToSpecial((Bitmap)instance);
+            }
+            else if (IsBackwardConversion(instance, targetType))
+            {
+                return ConverToBitmap((T)instance);
+            }
+
+            throw new InvalidOperationException();
+        }
+
+        protected abstract Bitmap ConverToBitmap(T instance);
+
+        protected abstract T ConvertToSpecial(Bitmap bitmap);
     }
     
     /// <summary>

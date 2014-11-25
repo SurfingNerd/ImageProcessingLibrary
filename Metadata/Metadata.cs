@@ -19,11 +19,23 @@ namespace ImageProcessingLibrary.Metadata
 
     public class ActivityMetadata
     {
+        public string ActivityShortName
+        {
+            get
+            {
+                if (ActivityType != null)
+                {
+                    return ActivityType.Name;
+                }
+                return "";
+            }
+        }
         public Type PrimaryImageType { get; set; }
         public Type ActivityType { get; set; }
         public List<string> Hashtags { get; private set; }
         public bool CreateActivity { get; set; }
         public bool ReadsSingleImage { get; set; }
+        public string AssemblyName { get; set; }
 
         /// <summary>
         /// Only Activities with an Standard Constructor can be used for some Operations, 

@@ -99,11 +99,9 @@ namespace ImageProcessingLibrary
                 m_bitmap = null;
                 m_frameworkImage = result;
                 return result;
-            }
-
-            if (m_frameworkImage != null)
+            } else if (m_frameworkImage != null)
             {
-                T result = TypeConversion.TypeConversionManager.Instance.GetImage<T>(m_bitmap);
+                T result = TypeConversion.TypeConversionManager.Instance.GetImage<T>(m_frameworkImage);
                 m_frameworkImage = result;
                 return result;
             }

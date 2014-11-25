@@ -159,8 +159,7 @@ namespace ImageProcessingLibrary
         public T Get<T>(string imageName)
         {
             RuntimeImage image = Get(imageName);
-            
-            throw new NotImplementedException();
+            return image.GetFrameworkImage<T>();
         }
     }
 

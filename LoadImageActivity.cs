@@ -76,6 +76,7 @@ namespace ImageProcessingLibrary
  
             //FileSystemImage fsi = RuntimeImage;
             //context.Set(OutputImageName ?? fsi.Name, fsi);
+
             FileInfo fileInfo = new FileInfo(FileLocation);
             string imageName = OutputImageName ?? fileInfo.Name;
             Bitmap bitmap = (Bitmap)(Bitmap.FromFile(fileInfo.FullName));

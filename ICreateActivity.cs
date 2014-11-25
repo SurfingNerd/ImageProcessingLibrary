@@ -22,4 +22,15 @@ namespace ImageProcessingLibrary
     {
         string ImageName { get; set; }
     }
+
+    public interface IDualImageActivity : IActivity
+    {
+        string Input1 { get; set; }
+        string Input2 { get; set; }
+    }
+
+    public interface IMultiImageActivity : IActivity
+    {
+        List<string> ImageNames { get; set; }
+    }
 }
